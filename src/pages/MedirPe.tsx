@@ -30,10 +30,7 @@ function TypewriterText({ text }: { text: string }) {
         setDisplayedText((prev) => prev + text.charAt(i));
         i++;
       } else {
-<<<<<<< HEAD
         setIsComplete(true);
-=======
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
         clearInterval(timer);
       }
     }, 50);
@@ -43,7 +40,6 @@ function TypewriterText({ text }: { text: string }) {
   return (
     <span>
       {displayedText}
-<<<<<<< HEAD
       {!isComplete && (
         <motion.span
           animate={{ opacity: [1, 0] }}
@@ -51,13 +47,6 @@ function TypewriterText({ text }: { text: string }) {
           className="inline-block w-[4px] h-[0.8em] bg-azul-primario align-middle ml-1 -mt-2"
         />
       )}
-=======
-      <motion.span
-        animate={{ opacity: [1, 0] }}
-        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-        className="inline-block w-[4px] h-[0.8em] bg-azul-primario align-middle ml-1 -mt-2"
-      />
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
     </span>
   );
 }
