@@ -110,7 +110,7 @@ export function ShoeCard({
           <div className="flex items-end justify-between mb-3">
               <div>
               <p className="text-xs text-cinza-texto mb-0.5">Por apenas</p>
-              <p className="font-display font-bold text-2xl text-red-600">
+              <p className="font-display font-bold text-2xl text-accent-erro">
                 R$ {price.toFixed(2).replace(".", ",")}
               </p>
               {originalPrice && (
