@@ -188,23 +188,14 @@ export function Explorar() {
       </div>
 
       {/* Header with controls */}
-=======
-
-  return (
-    <div className="container mx-auto px-4 md:px-6 py-8">
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
           <h1 className="text-3xl font-display font-bold text-azul-escuro mb-2">
             Explorar Sapatos
           </h1>
           <p className="text-cinza-texto text-sm">
- HEAD
             Mostrando {filteredShoes.length} de {MOCK_SHOES.length} sapatos
             {activeFiltersCount > 0 && ` (${activeFiltersCount} filtro${activeFiltersCount > 1 ? 's' : ''})`}
-
-            Mostrando {MOCK_SHOES.length} resultados para "Tênis"
-c79505c92ed6b3aebca497cce7bd9d9fa8b93553
           </p>
         </div>
 
