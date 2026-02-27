@@ -1,10 +1,10 @@
+
 # 👟 Calça-me
 
 ### O maior marketplace exclusivo para calçados!
 **Compre, venda e descubra o tamanho perfeito para seus pés** ✨
 
 [Explore](#-features) • [Instalar](#-instalação) • [Usar](#-como-usar) • [Contribuir](#-contribuindo)
-
 
 ---
 
@@ -117,11 +117,4 @@ Tem dúvidas ou encontrou um bug?
 
 ---
 
-<div align="center">
-
-### Made with ❤️ for shoe lovers 👟
-
-⭐ Se gostou, deixe uma estrela! | [Visite nosso site](#) | [Siga no Twitter](#)
-
-</div>
 
