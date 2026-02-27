@@ -116,8 +116,7 @@ function AnimatedCounter({ value, isFloat = false }: { value: number; isFloat?: 
         setCount(start);
       }
     }, incrementTime);
-    return () => clearInterval(timer);
-  }, [value, isFloat]);
+  return <span>{isFloat ? count.toFixed(1) : Math.round(count)}</span>;
 
     return () => clearInterval(timer);
   }, [value, isFloat]);
