@@ -8,6 +8,8 @@ interface ShoeCardProps {
   id: string;
   title: string;
   price: number;
+  originalPrice?: number;
+  discount?: number;
   image: string;
   condition: "Novo" | "Usado - Bom" | "Usado - Regular";
   rating: number;
@@ -106,11 +108,14 @@ export function ShoeCard({
 
         <div className="mt-auto">
           <div className="flex items-end justify-between mb-3">
-            <div>
+              <div>
               <p className="text-xs text-cinza-texto mb-0.5">Por apenas</p>
-              <p className="font-display font-bold text-2xl text-azul-escuro">
+              <p className="font-display font-bold text-2xl text-red-600">
                 R$ {price.toFixed(2).replace(".", ",")}
               </p>
+              {originalPrice && (
+                <p className="text-sm text-cinza-texto line-through">R$ {originalPrice.toFixed(2).replace('.',',')}</p>
+              )}
             </div>
           </div>
 

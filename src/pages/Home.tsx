@@ -543,10 +543,6 @@ export function Home() {
                 {shoe.endsIn}
               </div>
               <ShoeCard {...shoe} />
-              <div className="mt-2 flex items-center gap-2">
-                <span className="text-accent-alerta font-bold">R$ {shoe.price}</span>
-                <span className="text-cinza-texto line-through text-sm">R$ {shoe.originalPrice}</span>
-              </div>
             </motion.div>
           ))}
         </div>
