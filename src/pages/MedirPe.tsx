@@ -139,11 +139,7 @@ export function MedirPe() {
   const [length, setLength] = useState("");
   const [width, setWidth] = useState("normal");
   const [showError, setShowError] = useState(false);
-<<<<<<< HEAD
   const { width: windowWidth = 800, height: windowHeight = 600 } = useWindowSize();
-=======
-  const { width: windowWidth, height: windowHeight } = useWindowSize();
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
 
   const handleStart = () => setStep("choose");
 
