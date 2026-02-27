@@ -1,5 +1,6 @@
 import React from 'react'
 import HeroSection from '../shared/HeroSection'
+import ProductGrid from '../components/home/ProductGrid'
 
 export default function HomePage(){
   return (
@@ -9,6 +10,7 @@ export default function HomePage(){
         <h2 className="text-2xl font-bold">Destaques</h2>
         <p className="text-sm text-gray-500">Explore os melhores anúncios.</p>
       </section>
+      <ProductGrid />
     </main>
   )
 }

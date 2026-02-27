@@ -38,6 +38,20 @@ export const CartProvider: React.FC<{children: React.ReactNode}> = ({children}) 
     try{ localStorage.setItem('cart', JSON.stringify(cartItems)) }catch{}
   }, [cartItems]);
 
+  // One-time migration flag: mark that we've normalized persisted cart
+  useEffect(() => {
+    try{
+      const migrated = localStorage.getItem('cart_migrated_v1')
+      if(!migrated){
+        // ensure current normalized cart is written (it already is via the other effect)
+        localStorage.setItem('cart', JSON.stringify(cartItems))
+        localStorage.setItem('cart_migrated_v1', '1')
+        // eslint-disable-next-line no-console
+        console.info('Cart migration: normalized cart persisted and flagged')
+      }
+    }catch{}
+  }, [])
+
   const addToCart = (item: CartItem) => {
     setCartItems(prev => {
       const found = prev.find(i => i.productId === item.productId);

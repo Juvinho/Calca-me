@@ -31,6 +31,14 @@ def serialize(p: Product):
     }
 
 
+@router.get('/produtos/{prod_id}')
+def get_product(prod_id: str, db: Session = Depends(get_db)):
+    p = db.query(Product).filter(Product.id == prod_id).first()
+    if not p:
+        raise HTTPException(status_code=404, detail='Produto não encontrado')
+    return serialize(p)
+
+
 def seed_products(db: Session):
     samples = [
         { 'nome':'Nike Air Max 90', 'marca':'Nike', 'tamanho':42, 'preco':459.9, 'condicao':'novo', 'url_imagem':'https://placehold.co/350x300/EF4444/FFFFFF?text=Air+Max' },
@@ -41,6 +49,6 @@ def seed_products(db: Session):
         { 'nome':'Puma RS-X', 'marca':'Puma', 'tamanho':43, 'preco':399.0, 'condicao':'novo', 'url_imagem':'https://placehold.co/350x300/EF4444/FFFFFF?text=Puma' },
     ]
     for s in samples:
-        p = Product(id=uuid.uuid4(), nome=s['nome'], marca=s['marca'], tamanho=s['tamanho'], preco=s['preco'], condicao=s['condicao'], url_imagem=s['url_imagem'])
+        p = Product(id=str(uuid.uuid4()), nome=s['nome'], marca=s['marca'], tamanho=s['tamanho'], preco=s['preco'], condicao=s['condicao'], url_imagem=s['url_imagem'])
         db.add(p)
     db.commit()
