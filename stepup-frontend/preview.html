@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Preview - StepUp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#2563EB',
+              'hero-card': '#EF4444',
+              background: '#F9FAFB',
+              'accent-erro': '#EF4444'
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"','Inter','sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+    <style>body{font-family: 'Plus Jakarta Sans', Inter, sans-serif; background:#F9FAFB}</style>
+  </head>
+  <body class="p-8">
+    <h1 class="text-3xl font-bold mb-6">Preview: Flash Sale Cards</h1>
+
+    <div class="grid grid-cols-2 gap-6 max-w-4xl">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-2xl p-4 border shadow-sm">
+        <div class="relative aspect-square mb-4 rounded-xl overflow-hidden bg-gray-100 flex items-center justify-center">
+          <img src="https://placehold.co/300x260/EF4444/FFFFFF?text=Puma+RS-X" alt="Puma" class="w-full h-full object-cover" />
+        </div>
+        <h3 class="font-semibold text-lg mb-1">Puma RS-X</h3>
+        <p class="text-sm text-gray-500 mb-3">@official_puma • Tam: 42</p>
+        <div class="mt-auto">
+          <p class="text-xs text-gray-500 mb-1">Por apenas</p>
+          <p class="font-bold text-2xl text-accent-erro">R$ 199,90</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-2xl p-4 border shadow-sm">
+        <div class="relative aspect-square mb-4 rounded-xl overflow-hidden bg-gray-100 flex items-center justify-center">
+          <img src="https://placehold.co/300x260/EF4444/FFFFFF?text=Air+Jordan" alt="Jordan" class="w-full h-full object-cover" />
+        </div>
+        <h3 class="font-semibold text-lg mb-1">Air Jordan 1 Retro</h3>
+        <p class="text-sm text-gray-500 mb-3">@sneaker_world • Tam: 41</p>
+        <div class="mt-auto">
+          <p class="text-xs text-gray-500 mb-1">Por apenas</p>
+          <p class="font-bold text-2xl text-accent-erro">R$ 450,00</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-6 text-sm text-gray-600">Observação: este preview usa o Tailwind CDN para visualização rápida. Abra este arquivo no navegador (duplo-clique em <code>stepup-frontend/preview.html</code>).</p>
+  </body>
+</html>
