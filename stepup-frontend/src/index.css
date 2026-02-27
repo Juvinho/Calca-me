@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --primary: #2563EB;
+  --hero-card: #EF4444;
+  --background: #F9FAFB;
+}
+
+body{font-family: 'Plus Jakarta Sans', Inter, sans-serif}
