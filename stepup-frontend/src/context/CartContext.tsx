@@ -16,7 +16,21 @@ export const CartProvider: React.FC<{children: React.ReactNode}> = ({children}) 
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     try{
       const raw = localStorage.getItem('cart');
-      return raw ? JSON.parse(raw) : [];
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      // Normalize legacy or mixed shapes into current CartItem shape
+      const normalized = parsed.map((it: any) => {
+        // possible legacy shapes: { id, title, price, image, size, color }
+        // or { productId, nome, preco, quantidade, urlImagem }
+        const productId = it.productId || it.id || it.product_id || (it.itemId && String(it.itemId)) || String(it.id || '')
+        const nome = it.nome || it.name || it.title || it.titleName || ''
+        const preco = Number(it.preco ?? it.preco_price ?? it.price ?? it.valor ?? 0) || Number(it.price ?? 0)
+        const quantidade = Number(it.quantidade ?? it.quantity ?? it.qtd ?? 1) || 1
+        const urlImagem = it.urlImagem || it.image || it.img || it.url || ''
+        return { productId: String(productId || nome || Math.random()), nome, preco, quantidade, urlImagem } as CartItem
+      })
+      return normalized;
     }catch{ return [] }
   });
 
@@ -38,8 +52,11 @@ export const CartProvider: React.FC<{children: React.ReactNode}> = ({children}) 
     setCartItems(prev => prev.filter(i => i.productId !== productId))
   }
 
-  const getCartCount = () => cartItems.reduce((acc, i) => acc + i.quantidade, 0)
-  const getCartTotal = () => cartItems.reduce((acc, i) => acc + i.preco * i.quantidade, 0)
+  const getCartCount = () => {
+    const sum = cartItems.reduce((acc, i) => acc + (Number(i.quantidade) || 0), 0)
+    return Math.max(0, Math.floor(sum))
+  }
+  const getCartTotal = () => cartItems.reduce((acc, i) => acc + (Number(i.preco) || 0) * (Number(i.quantidade) || 0), 0)
   const clearCart = () => setCartItems([])
 
   return (
