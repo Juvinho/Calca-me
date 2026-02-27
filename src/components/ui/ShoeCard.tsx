@@ -113,9 +113,7 @@ export function ShoeCard({
               <p className="font-display font-bold text-2xl text-accent-erro">
                 R$ {price.toFixed(2).replace(".", ",")}
               </p>
-              {originalPrice && (
-                <p className="text-sm text-cinza-texto line-through">R$ {originalPrice.toFixed(2).replace('.',',')}</p>
-              )}
+              {/* originalPrice intentionally not shown in card per UI decision */}
             </div>
           </div>
 
