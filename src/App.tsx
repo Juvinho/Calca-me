@@ -6,6 +6,7 @@ import { Produto } from "./pages/Produto";
 import { Vender } from "./pages/Vender";
 import { MedirPe } from "./pages/MedirPe";
 import { Carrinho } from "./pages/Carrinho";
+import { Sobre } from "./pages/Sobre";
 import { NotFound } from "./pages/NotFound";
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="vender" element={<Vender />} />
           <Route path="medir-pe" element={<MedirPe />} />
           <Route path="carrinho" element={<Carrinho />} />
+          <Route path="sobre" element={<Sobre />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

@@ -14,10 +14,16 @@ export function Footer() {
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                fill="currentColor"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="text-azul-claro"
               >
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                <path d="M12 12v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <path d="M12 12v-2a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v2" />
+                <path d="M2 12h20v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z" />
               </svg>
               <span className="font-display font-bold text-xl tracking-tight text-white">
                 Calça-me
@@ -106,6 +112,14 @@ export function Footer() {
               Ajuda
             </h4>
             <ul className="space-y-2 text-sm text-cinza-leve/80">
+              <li>
+                <Link
+                  to="/sobre"
+                  className="hover:text-azul-claro transition-colors"
+                >
+                  Sobre o Calça-me
+                </Link>
+              </li>
               <li>
                 <Link
                   to="/medir-pe"

@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowRight, Zap, Ruler } from "lucide-react";
+import { ArrowRight, Zap, Ruler, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ShoeCard } from "@/components/ui/ShoeCard";
+
+const HERO_SHOES = [
+  "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1000",
+  "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&q=80&w=1000",
+  "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&q=80&w=1000",
+];
 
 const CATEGORIES = [
   { id: "tenis", name: "Tênis", icon: "👟", count: "1.2k" },
@@ -74,8 +80,31 @@ export function Home() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
+  const [startTypingDynamic, setStartTypingDynamic] = useState(false);
+  
+  const [currentHeroShoe, setCurrentHeroShoe] = useState(0);
+  const [heroShoeDirection, setHeroShoeDirection] = useState(0);
+
+  const nextHeroShoe = () => {
+    setHeroShoeDirection(1);
+    setCurrentHeroShoe((prev) => (prev + 1) % HERO_SHOES.length);
+  };
+
+  const prevHeroShoe = () => {
+    setHeroShoeDirection(-1);
+    setCurrentHeroShoe((prev) => (prev - 1 + HERO_SHOES.length) % HERO_SHOES.length);
+  };
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setStartTypingDynamic(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!startTypingDynamic) return;
+
     let timer: NodeJS.Timeout;
     
     const handleType = () => {
@@ -103,7 +132,7 @@ export function Home() {
 
     timer = setTimeout(handleType, typingSpeed);
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, typingSpeed]);
+  }, [text, isDeleting, loopNum, typingSpeed, startTypingDynamic]);
 
   return (
     <div className="flex flex-col gap-20 pb-20">
@@ -117,15 +146,20 @@ export function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-5xl md:text-7xl font-display font-bold text-azul-escuro leading-[1.1] mb-6"
               >
-                Cada passo conta. <br />
-                <span className="text-gradient">
+                <span className="inline-block overflow-hidden whitespace-nowrap animate-[typing_2s_steps(40,end)] align-bottom">
+                  Cada passo conta.
+                </span>{" "}
+                <br />
+                <span className="text-azul-primario">
                   {text}
+                </span>
+                {startTypingDynamic && (
                   <motion.span
                     animate={{ opacity: [1, 0] }}
                     transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
                     className="inline-block w-[4px] h-[0.8em] bg-azul-primario align-middle ml-1 -mt-2"
                   />
-                </span>{" "}
+                )}
                 <br />
                 sapatos com estilo.
               </motion.h1>
@@ -197,17 +231,58 @@ export function Home() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, type: "spring" }}
-                className="relative z-10 w-full max-w-md"
+                className="relative z-10 w-full max-w-md aspect-square flex items-center justify-center"
               >
-                <motion.img
-                  whileTap={{ rotate: 360, scale: 0.8 }}
-                  animate={{ y: [0, -15, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1000"
-                  alt="Sneaker 3D"
-                  className="w-full h-auto drop-shadow-2xl rounded-3xl rotate-[-15deg] cursor-pointer"
-                  referrerPolicy="no-referrer"
-                />
+                <AnimatePresence initial={false} custom={heroShoeDirection}>
+                  <motion.img
+                    key={currentHeroShoe}
+                    custom={heroShoeDirection}
+                    variants={{
+                      enter: (direction: number) => ({
+                        x: direction > 0 ? "100%" : "-100%",
+                        opacity: 0,
+                        rotate: direction > 0 ? 15 : -45,
+                      }),
+                      center: {
+                        zIndex: 1,
+                        x: 0,
+                        opacity: 1,
+                        rotate: -15,
+                      },
+                      exit: (direction: number) => ({
+                        zIndex: 0,
+                        x: direction < 0 ? "100%" : "-100%",
+                        opacity: 0,
+                        rotate: direction < 0 ? 15 : -45,
+                      }),
+                    }}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      x: { type: "spring", stiffness: 300, damping: 30 },
+                      opacity: { duration: 0.2 },
+                      rotate: { type: "spring", stiffness: 300, damping: 30 },
+                    }}
+                    src={HERO_SHOES[currentHeroShoe]}
+                    alt="Sneaker 3D"
+                    className="absolute w-full h-auto drop-shadow-2xl rounded-3xl cursor-pointer"
+                    referrerPolicy="no-referrer"
+                  />
+                </AnimatePresence>
+
+                <button
+                  onClick={prevHeroShoe}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white shadow-lg z-20 transition-transform hover:scale-110"
+                >
+                  <ChevronLeft className="w-6 h-6 text-azul-escuro" />
+                </button>
+                <button
+                  onClick={nextHeroShoe}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white shadow-lg z-20 transition-transform hover:scale-110"
+                >
+                  <ChevronRight className="w-6 h-6 text-azul-escuro" />
+                </button>
               </motion.div>
             </div>
           </div>
@@ -265,7 +340,7 @@ export function Home() {
           <div className="absolute bottom-0 left-0 w-40 h-40 bg-azul-claro/30 rounded-full blur-2xl translate-y-1/3 -translate-x-1/4"></div>
 
           <div className="relative z-10 max-w-xl">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
               Não sabe seu tamanho? ✨
             </h2>
             <p className="text-azul-gelo text-lg mb-8">

@@ -35,7 +35,15 @@ const MOCK_PRODUCT = {
     sales: 156,
     isTopSeller: true,
   },
-  sizes: [38, 39, 40, 41, 42, 43],
+  sizes: [
+    { size: 38, available: true },
+    { size: 39, available: false },
+    { size: 40, available: true },
+    { size: 41, available: true },
+    { size: 42, available: true },
+    { size: 43, available: false },
+    { size: 44, available: true },
+  ],
   color: "Azul / Branco",
   description:
     "Tênis Nike Air Max 90 original, usado poucas vezes. Apresenta leves marcas de uso na sola, mas o cabedal está impecável. Acompanha caixa original.",
@@ -44,18 +52,29 @@ const MOCK_PRODUCT = {
 export function Produto() {
   const { id } = useParams();
   const [currentImage, setCurrentImage] = useState(0);
+  const [direction, setDirection] = useState(0);
   const [selectedSize, setSelectedSize] = useState<number | null>(42);
   const [isLiked, setIsLiked] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isShaking, setIsShaking] = useState(false);
   const thumbnailsRef = useRef<HTMLDivElement>(null);
 
-  const nextImage = () =>
+  const nextImage = () => {
+    setDirection(1);
     setCurrentImage((prev) => (prev + 1) % MOCK_PRODUCT.images.length);
-  const prevImage = () =>
+  };
+  const prevImage = () => {
+    setDirection(-1);
     setCurrentImage(
       (prev) =>
         (prev - 1 + MOCK_PRODUCT.images.length) % MOCK_PRODUCT.images.length,
     );
+  };
+
+  const handleThumbnailClick = (idx: number) => {
+    setDirection(idx > currentImage ? 1 : -1);
+    setCurrentImage(idx);
+  };
 
   useEffect(() => {
     if (thumbnailsRef.current) {
@@ -72,6 +91,14 @@ export function Produto() {
       }
     }
   }, [currentImage]);
+
+  const handleShareClick = () => {
+    setIsShareOpen(!isShareOpen);
+    if (!isShareOpen) {
+      setIsShaking(true);
+      setTimeout(() => setIsShaking(false), 500);
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-8">
@@ -97,16 +124,36 @@ export function Produto() {
         {/* Image Gallery */}
         <div className="space-y-4">
           <div className="relative aspect-square bg-branco-off rounded-3xl overflow-hidden group">
-            <AnimatePresence mode="wait">
+            <AnimatePresence initial={false} custom={direction}>
               <motion.img
                 key={currentImage}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
+                custom={direction}
+                variants={{
+                  enter: (direction: number) => ({
+                    x: direction > 0 ? "100%" : "-100%",
+                    opacity: 0,
+                  }),
+                  center: {
+                    zIndex: 1,
+                    x: 0,
+                    opacity: 1,
+                  },
+                  exit: (direction: number) => ({
+                    zIndex: 0,
+                    x: direction < 0 ? "100%" : "-100%",
+                    opacity: 0,
+                  }),
+                }}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.2 },
+                }}
                 src={MOCK_PRODUCT.images[currentImage]}
                 alt={`${MOCK_PRODUCT.title} - Foto ${currentImage + 1}`}
-                className="w-full h-full object-cover mix-blend-multiply"
+                className="absolute inset-0 w-full h-full object-cover mix-blend-multiply"
                 referrerPolicy="no-referrer"
               />
             </AnimatePresence>
@@ -137,7 +184,7 @@ export function Produto() {
                         animate={{ opacity: 1, x: -55, y: 0, scale: 1 }}
                         exit={{ opacity: 0, x: 0, y: 0, scale: 0 }}
                         transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                        className="absolute top-0 right-0 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md text-blue-600 hover:scale-110 transition-transform z-10"
+                        className={cn("absolute top-0 right-0 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md text-blue-600 hover:scale-110 transition-transform z-10", isShaking && "animate-shake")}
                       >
                         <Facebook className="w-5 h-5" />
                       </motion.a>
@@ -149,7 +196,7 @@ export function Produto() {
                         animate={{ opacity: 1, x: -40, y: 40, scale: 1 }}
                         exit={{ opacity: 0, x: 0, y: 0, scale: 0 }}
                         transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.05 }}
-                        className="absolute top-0 right-0 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md text-sky-500 hover:scale-110 transition-transform z-10"
+                        className={cn("absolute top-0 right-0 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md text-sky-500 hover:scale-110 transition-transform z-10", isShaking && "animate-shake")}
                       >
                         <Twitter className="w-5 h-5" />
                       </motion.a>
@@ -161,7 +208,7 @@ export function Produto() {
                         animate={{ opacity: 1, x: 0, y: 55, scale: 1 }}
                         exit={{ opacity: 0, x: 0, y: 0, scale: 0 }}
                         transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
-                        className="absolute top-0 right-0 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md text-green-500 hover:scale-110 transition-transform z-10"
+                        className={cn("absolute top-0 right-0 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md text-green-500 hover:scale-110 transition-transform z-10", isShaking && "animate-shake")}
                       >
                         <MessageCircle className="w-5 h-5" />
                       </motion.a>
@@ -169,7 +216,7 @@ export function Produto() {
                   )}
                 </AnimatePresence>
                 <button
-                  onClick={() => setIsShareOpen(!isShareOpen)}
+                  onClick={handleShareClick}
                   className="relative z-20 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-sm"
                 >
                   <Share2 className="w-5 h-5 text-cinza-texto" />
@@ -200,7 +247,7 @@ export function Produto() {
             {MOCK_PRODUCT.images.map((img, idx) => (
               <button
                 key={idx}
-                onClick={() => setCurrentImage(idx)}
+                onClick={() => handleThumbnailClick(idx)}
                 className={cn(
                   "relative w-24 h-24 rounded-xl overflow-hidden shrink-0 border-2 transition-all",
                   currentImage === idx
@@ -275,18 +322,28 @@ export function Produto() {
               </Link>
             </div>
             <div className="grid grid-cols-4 sm:grid-cols-6 gap-3">
-              {MOCK_PRODUCT.sizes.map((size) => (
+              {MOCK_PRODUCT.sizes.map(({ size, available }) => (
                 <button
                   key={size}
-                  onClick={() => setSelectedSize(size)}
+                  onClick={() => available && setSelectedSize(size)}
+                  disabled={!available}
                   className={cn(
-                    "py-3 rounded-xl border text-sm font-bold transition-all",
-                    selectedSize === size
+                    "py-3 rounded-xl border text-sm font-bold transition-all relative overflow-hidden",
+                    !available && "opacity-50 cursor-not-allowed bg-branco-off text-cinza-leve border-cinza-leve/50",
+                    available && selectedSize === size
                       ? "bg-azul-primario text-white border-azul-primario shadow-md"
-                      : "bg-white text-cinza-texto border-cinza-leve hover:border-azul-claro hover:text-azul-primario",
+                      : "",
+                    available && selectedSize !== size
+                      ? "bg-white text-cinza-texto border-cinza-leve hover:border-azul-claro hover:text-azul-primario"
+                      : "",
                   )}
                 >
                   {size}
+                  {!available && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-full h-[1px] bg-cinza-leve rotate-45 absolute"></div>
+                    </div>
+                  )}
                 </button>
               ))}
             </div>
