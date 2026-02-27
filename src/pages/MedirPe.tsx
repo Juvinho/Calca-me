@@ -30,7 +30,10 @@ function TypewriterText({ text }: { text: string }) {
         setDisplayedText((prev) => prev + text.charAt(i));
         i++;
       } else {
+<<<<<<< HEAD
         setIsComplete(true);
+=======
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
         clearInterval(timer);
       }
     }, 50);
@@ -40,6 +43,7 @@ function TypewriterText({ text }: { text: string }) {
   return (
     <span>
       {displayedText}
+<<<<<<< HEAD
       {!isComplete && (
         <motion.span
           animate={{ opacity: [1, 0] }}
@@ -47,6 +51,13 @@ function TypewriterText({ text }: { text: string }) {
           className="inline-block w-[4px] h-[0.8em] bg-azul-primario align-middle ml-1 -mt-2"
         />
       )}
+=======
+      <motion.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+        className="inline-block w-[4px] h-[0.8em] bg-azul-primario align-middle ml-1 -mt-2"
+      />
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
     </span>
   );
 }
@@ -103,19 +114,18 @@ function AnimatedCounter({ value, isFloat = false }: { value: number; isFloat?: 
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    let start = 0;
-    const end = value;
-    if (start === end) return;
-
-    const frames = isFloat ? Math.ceil(end * 2) : Math.ceil(end);
-    const totalDuration = 1500;
-    const frameTime = totalDuration / frames;
-
-    let currentFrame = 0;
-    let timer = setInterval(() => {
-      currentFrame++;
-      const progress = Math.min(currentFrame / frames, 1);
-      const easeProgress = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+    let i = 0;
+    const timer = setInterval(() => {
+      if (i < text.length) {
+        setDisplayedText((prev) => prev + text.charAt(i));
+        i++;
+      } else {
+        setIsComplete(true);
+        clearInterval(timer);
+      }
+    }, 50);
+    return () => clearInterval(timer);
+  }, [text]);
       const newCount = end * easeProgress;
       
       if (progress >= 1) {
@@ -125,11 +135,29 @@ function AnimatedCounter({ value, isFloat = false }: { value: number; isFloat?: 
         setCount(newCount);
       }
     }, frameTime);
+=======
+    let totalDuration = 1500;
+    let incrementTime = (totalDuration / end) * 1.5;
+
+    let timer = setInterval(() => {
+      start += isFloat ? 0.5 : 1;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, incrementTime);
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
 
     return () => clearInterval(timer);
   }, [value, isFloat]);
 
+<<<<<<< HEAD
   return <span>{isFloat ? count.toFixed(1) : Math.round(count)}</span>;
+=======
+  return <span>{isFloat ? count.toFixed(1) : count}</span>;
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
 }
 
 export function MedirPe() {
@@ -147,7 +175,11 @@ export function MedirPe() {
   const [length, setLength] = useState("");
   const [width, setWidth] = useState("normal");
   const [showError, setShowError] = useState(false);
+<<<<<<< HEAD
   const { width: windowWidth = 800, height: windowHeight = 600 } = useWindowSize();
+=======
+  const { width: windowWidth, height: windowHeight } = useWindowSize();
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
 
   const handleStart = () => setStep("choose");
 
@@ -433,6 +465,7 @@ export function MedirPe() {
                         </div>
                       </label>
                       <div className="flex gap-2">
+<<<<<<< HEAD
                         {["estreito", "normal", "largo"].map((w) => (
                           <button
                             key={w}
@@ -440,11 +473,24 @@ export function MedirPe() {
                             className={cn(
                               "flex-1 py-3 rounded-xl border text-sm font-medium transition-all duration-300",
                               width === w
+=======
+                        {["Estreito", "Normal", "Largo"].map((w) => (
+                          <button
+                            key={w}
+                            onClick={() => setWidth(w.toLowerCase())}
+                            className={cn(
+                              "flex-1 py-3 rounded-xl border text-sm font-medium transition-all duration-300",
+                              width === w.toLowerCase()
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                                 ? "bg-azul-primario text-white border-azul-primario shadow-md scale-105"
                                 : "bg-branco-off text-cinza-texto border-cinza-leve hover:bg-azul-gelo hover:border-azul-claro/50",
                             )}
                           >
+<<<<<<< HEAD
                             {w.charAt(0).toUpperCase() + w.slice(1)}
+=======
+                            {w}
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                           </button>
                         ))}
                       </div>
@@ -478,26 +524,18 @@ export function MedirPe() {
                             </motion.div>
                             Calculando tamanho...
                           </>
-                        ) : (
-                          "Calcular meu tamanho"
-                        )}
-                      </span>
-                    </RippleButton>
-                  </motion.div>
-                </div>
-              )}
-
-              {(method === "camera" || method === "ruler") && (
-                <div className="text-center py-12">
-                  <motion.div variants={itemVariants} className="w-24 h-24 bg-azul-gelo rounded-full flex items-center justify-center mx-auto mb-6">
-                    {method === "camera" ? (
-                      <Camera className="w-10 h-10 text-azul-primario" />
-                    ) : (
-                      <Ruler className="w-10 h-10 text-azul-primario" />
-                    )}
-                  </motion.div>
-                  <motion.h3 variants={itemVariants} className="text-2xl font-display font-bold text-azul-escuro mb-4">
-                    {method === "camera" ? "Câmera AR" : "Régua Digital"}
+                        return (
+                          <span>
+                            {displayedText}
+                            {!isComplete && (
+                              <motion.span
+                                animate={{ opacity: [1, 0] }}
+                                transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                                className="inline-block w-[4px] h-[0.8em] bg-azul-primario align-middle ml-1 -mt-2"
+                              />
+                            )}
+                          </span>
+                        );
                   </motion.h3>
                   <motion.p variants={itemVariants} className="text-cinza-texto mb-8">
                     Esta funcionalidade requer acesso à câmera ou calibração de

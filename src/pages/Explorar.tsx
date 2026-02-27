@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Filter, SlidersHorizontal, ChevronDown, Search, Image as ImageIcon, Heart, Grid3x3, List, X, Sparkles, TrendingUp } from "lucide-react";
 import { ShoeCard } from "@/components/ui/ShoeCard";
@@ -189,20 +188,30 @@ export function Explorar() {
       </div>
 
       {/* Header with controls */}
+=======
+
+  return (
+    <div className="container mx-auto px-4 md:px-6 py-8">
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
           <h1 className="text-3xl font-display font-bold text-azul-escuro mb-2">
             Explorar Sapatos
           </h1>
           <p className="text-cinza-texto text-sm">
+ HEAD
             Mostrando {filteredShoes.length} de {MOCK_SHOES.length} sapatos
             {activeFiltersCount > 0 && ` (${activeFiltersCount} filtro${activeFiltersCount > 1 ? 's' : ''})`}
+
+            Mostrando {MOCK_SHOES.length} resultados para "Tênis"
+c79505c92ed6b3aebca497cce7bd9d9fa8b93553
           </p>
         </div>
 
         <div className="flex items-center gap-3 w-full md:w-auto">
           <button
             onClick={() => setIsFilterOpen(!isFilterOpen)}
+<<<<<<< HEAD
             className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-branco-off border border-cinza-leve px-4 py-2.5 rounded-xl text-sm font-medium text-azul-escuro hover:bg-azul-gelo transition-colors relative"
           >
             <Filter className="w-4 h-4" />
@@ -216,10 +225,21 @@ export function Explorar() {
 
           <div className="relative">
             <select className="appearance-none bg-branco-off border border-cinza-leve px-4 py-2.5 pr-10 rounded-xl text-sm font-medium text-azul-escuro hover:bg-azul-gelo transition-colors focus:outline-none focus:ring-2 focus:ring-azul-primario">
+=======
+            className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-branco-off border border-cinza-leve px-4 py-2.5 rounded-xl text-sm font-medium text-azul-escuro hover:bg-azul-gelo transition-colors"
+          >
+            <Filter className="w-4 h-4" />
+            Filtros
+          </button>
+
+          <div className="relative flex-1 md:flex-none">
+            <select className="w-full appearance-none bg-branco-off border border-cinza-leve px-4 py-2.5 pr-10 rounded-xl text-sm font-medium text-azul-escuro hover:bg-azul-gelo transition-colors focus:outline-none focus:ring-2 focus:ring-azul-primario">
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
               <option>Mais Relevantes</option>
               <option>Menor Preço</option>
               <option>Maior Preço</option>
               <option>Mais Recentes</option>
+<<<<<<< HEAD
               <option>Melhor Avaliação</option>
             </select>
             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cinza-texto pointer-events-none" />
@@ -240,11 +260,20 @@ export function Explorar() {
               <List className="w-4 h-4" />
             </button>
           </div>
+=======
+            </select>
+            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cinza-texto pointer-events-none" />
+          </div>
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
         </div>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
+<<<<<<< HEAD
         {/* Sidebar Filters */}
+=======
+        {/* Sidebar Filters (Desktop) */}
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
         <motion.aside
           initial={false}
           animate={{
@@ -254,6 +283,7 @@ export function Explorar() {
           className="hidden lg:block overflow-hidden shrink-0"
         >
           <div className="w-[280px] bg-white border border-cinza-leve/50 rounded-2xl p-6 shadow-sm">
+<<<<<<< HEAD
             <div className="flex items-center justify-between gap-2 mb-6 pb-4 border-b border-cinza-leve/30">
               <div className="flex items-center gap-2">
                 <SlidersHorizontal className="w-5 h-5 text-azul-primario" />
@@ -275,10 +305,25 @@ export function Explorar() {
               {/* Tamanho */}
               <div>
                 <h4 className="font-medium text-azul-escuro mb-3 text-sm">Tamanho</h4>
+=======
+            <div className="flex items-center gap-2 mb-6 pb-4 border-b border-cinza-leve/30">
+              <SlidersHorizontal className="w-5 h-5 text-azul-primario" />
+              <h3 className="font-display font-bold text-lg text-azul-escuro">
+                Filtros
+              </h3>
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-medium text-azul-escuro mb-3 text-sm">
+                  Tamanho
+                </h4>
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                 <div className="grid grid-cols-4 gap-2">
                   {[38, 39, 40, 41, 42, 43, 44].map((size) => (
                     <button
                       key={size}
+<<<<<<< HEAD
                       onClick={() => {
                         if (selectedSizes.includes(size)) {
                           setSelectedSizes(selectedSizes.filter(s => s !== size));
@@ -291,6 +336,9 @@ export function Explorar() {
                           ? "bg-azul-primario text-white border-azul-primario"
                           : "border-cinza-leve hover:border-azul-primario hover:text-azul-primario"
                       }`}
+=======
+                      className="border border-cinza-leve rounded-lg py-1.5 text-sm hover:border-azul-primario hover:text-azul-primario transition-colors"
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                     >
                       {size}
                     </button>
@@ -298,6 +346,7 @@ export function Explorar() {
                 </div>
               </div>
 
+<<<<<<< HEAD
               {/* Condição */}
               <div>
                 <h4 className="font-medium text-azul-escuro mb-3 text-sm">Condição</h4>
@@ -375,11 +424,79 @@ export function Explorar() {
                       className={`w-8 h-8 rounded-full ${c.bg} ring-2 transition-all shadow-sm ${
                         selectedColors.includes(c.color) ? "ring-azul-primario scale-110" : "ring-transparent hover:ring-azul-primario hover:scale-110"
                       }`}
+=======
+              <div>
+                <h4 className="font-medium text-azul-escuro mb-3 text-sm">
+                  Condição
+                </h4>
+                <div className="space-y-2">
+                  {["Novo", "Seminovo", "Usado - Bom", "Usado - Regular"].map(
+                    (cond) => (
+                      <label
+                        key={cond}
+                        className="flex items-center gap-2 cursor-pointer group"
+                      >
+                        <input
+                          type="checkbox"
+                          className="w-4 h-4 rounded border-cinza-leve text-azul-primario focus:ring-azul-primario"
+                        />
+                        <span className="text-sm text-cinza-texto group-hover:text-azul-escuro transition-colors">
+                          {cond}
+                        </span>
+                      </label>
+                    ),
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium text-azul-escuro mb-3 text-sm">
+                  Marca
+                </h4>
+                <div className="space-y-2">
+                  {["Nike", "Adidas", "Vans", "Puma", "New Balance", "Converse"].map(
+                    (brand) => (
+                      <label
+                        key={brand}
+                        className="flex items-center gap-2 cursor-pointer group"
+                      >
+                        <input
+                          type="checkbox"
+                          className="w-4 h-4 rounded border-cinza-leve text-azul-primario focus:ring-azul-primario"
+                        />
+                        <span className="text-sm text-cinza-texto group-hover:text-azul-escuro transition-colors">
+                          {brand}
+                        </span>
+                      </label>
+                    ),
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium text-azul-escuro mb-3 text-sm">
+                  Cor
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { name: "Preto", bg: "bg-black" },
+                    { name: "Branco", bg: "bg-white border border-cinza-leve" },
+                    { name: "Azul", bg: "bg-blue-600" },
+                    { name: "Vermelho", bg: "bg-red-600" },
+                    { name: "Cinza", bg: "bg-gray-500" },
+                    { name: "Verde", bg: "bg-green-600" },
+                  ].map((color) => (
+                    <button
+                      key={color.name}
+                      title={color.name}
+                      className={`w-8 h-8 rounded-full ${color.bg} ring-2 ring-transparent hover:ring-azul-primario hover:scale-110 transition-all shadow-sm`}
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                     />
                   ))}
                 </div>
               </div>
 
+<<<<<<< HEAD
               {/* Preço */}
               <div>
                 <h4 className="font-medium text-azul-escuro mb-3 text-sm">Preço</h4>
@@ -388,14 +505,26 @@ export function Explorar() {
                     type="number"
                     value={priceRange.min}
                     onChange={(e) => setPriceRange({ ...priceRange, min: parseInt(e.target.value) || 0 })}
+=======
+              <div>
+                <h4 className="font-medium text-azul-escuro mb-3 text-sm">
+                  Preço
+                </h4>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                     placeholder="Min"
                     className="w-full border border-cinza-leve rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-azul-primario"
                   />
                   <span className="text-cinza-leve">-</span>
                   <input
                     type="number"
+<<<<<<< HEAD
                     value={priceRange.max}
                     onChange={(e) => setPriceRange({ ...priceRange, max: parseInt(e.target.value) || 500 })}
+=======
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                     placeholder="Max"
                     className="w-full border border-cinza-leve rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-azul-primario"
                   />
@@ -405,6 +534,7 @@ export function Explorar() {
           </div>
         </motion.aside>
 
+<<<<<<< HEAD
         {/* Main Content */}
         <div className="flex-1">
           {/* Comparador */}
@@ -591,6 +721,22 @@ export function Explorar() {
               </button>
             </div>
           )}
+=======
+        {/* Grid */}
+        <div className="flex-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {MOCK_SHOES.map((shoe, i) => (
+              <motion.div
+                key={shoe.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+              >
+                <ShoeCard {...shoe} />
+              </motion.div>
+            ))}
+          </div>
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
         </div>
       </div>
     </div>

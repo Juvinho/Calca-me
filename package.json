@@ -1,25 +1,4 @@
 {
-  "name": "calca-me",
-  "description": "O maior marketplace exclusivo para calçados. Compre, venda e descubra o tamanho perfeito para seus pés com IA.",
-  "version": "0.2.0",
-  "type": "module",
-  "private": true,
-  "author": "Juvinho",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Juvinho/Calca-me.git"
-  },
-  "keywords": [
-    "marketplace",
-    "shoes",
-    "calçados",
-    "e-commerce",
-    "react",
-    "typescript",
-    "gemini-ai",
-    "tailwind"
-  ],
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",

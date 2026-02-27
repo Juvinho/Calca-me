@@ -29,6 +29,7 @@ function AnimatedNumber({ value }: { value: number }) {
   return <span>{count.toFixed(2).replace('.', ',')}</span>;
 }
 
+<<<<<<< HEAD
 // Mock data for sales history
 const SALES_HISTORY = [
   { id: 1, title: "Adidas Ultraboost 21", price: 320, views: 156, sold: true, date: "2024-02-20" },
@@ -100,6 +101,14 @@ export function Vender() {
   const totalSold = SALES_HISTORY.filter(s => s.sold).length;
   const totalEarnings = SALES_HISTORY.filter(s => s.sold).reduce((acc, s) => acc + s.price, 0);
   const totalViews = SALES_HISTORY.reduce((acc, s) => acc + s.views, 0);
+=======
+export function Vender() {
+  const [step, setStep] = useState(1);
+  const [isUploading, setIsUploading] = useState(false);
+  const [isPublished, setIsPublished] = useState(false);
+  const [price, setPrice] = useState("189,90");
+  const [hasError, setHasError] = useState(false);
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
 
   const handleUpload = () => {
     setIsUploading(true);
@@ -118,6 +127,7 @@ export function Vender() {
     setIsPublished(true);
   };
 
+<<<<<<< HEAD
   const handleGenerateDescription = async () => {
     setIsGeneratingDescription(true);
     const desc = await generateDescription(productData);
@@ -125,6 +135,8 @@ export function Vender() {
     setIsGeneratingDescription(false);
   };
 
+=======
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
   if (isPublished) {
     const numericPrice = parseFloat(price.replace(',', '.'));
     
@@ -185,7 +197,11 @@ export function Vender() {
           <button
             onClick={() => {
               setIsPublished(false);
+<<<<<<< HEAD
               setStep(0);
+=======
+              setStep(1);
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
             }}
             className="btn-ripple bg-azul-primario text-white px-8 py-4 rounded-xl font-bold hover:bg-azul-escuro transition-colors shadow-lg shadow-azul-primario/20 relative z-10 animate-fade-in-up"
             style={{ animationDelay: '500ms' }}
@@ -197,6 +213,7 @@ export function Vender() {
     );
   }
 
+<<<<<<< HEAD
   // Dashboard Screen (Step 0)
   if (step === 0) {
     return (
@@ -306,6 +323,8 @@ export function Vender() {
     );
   }
 
+=======
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
   return (
     <div className="min-h-[calc(100vh-80px)] bg-gradient-to-br from-branco-off via-azul-gelo/50 to-branco-off animate-gradient-x relative overflow-hidden">
       {/* Particles Background */}
@@ -341,7 +360,11 @@ export function Vender() {
           <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-cinza-leve/30 rounded-full z-0"></div>
           <div
             className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-azul-primario rounded-full z-0 transition-all duration-500"
+<<<<<<< HEAD
             style={{ width: step === 1 ? "33%" : step === 2 ? "66%" : "100%" }}
+=======
+            style={{ width: step === 1 ? "50%" : "100%" }}
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
           ></div>
 
           <div className="relative z-10 flex flex-col items-center gap-2">
@@ -360,6 +383,7 @@ export function Vender() {
             </div>
             <span className="text-sm font-medium text-azul-escuro">Detalhes</span>
           </div>
+<<<<<<< HEAD
           <div className="relative z-10 flex flex-col items-center gap-2">
             <div
               className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors ${step >= 3 ? "bg-azul-primario text-white" : "bg-branco-off text-cinza-texto border border-cinza-leve"}`}
@@ -368,6 +392,8 @@ export function Vender() {
             </div>
             <span className="text-sm font-medium text-azul-escuro">Preview</span>
           </div>
+=======
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
         </div>
 
         <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-xl p-8 border border-white/40 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
@@ -424,6 +450,7 @@ export function Vender() {
                   Detalhe
                 </div>
               </div>
+<<<<<<< HEAD
 
               <div className="pt-6 border-t border-cinza-leve/30 flex justify-end items-center mt-6 animate-fade-in-up" style={{ animationDelay: '500ms' }}>
                 <button
@@ -434,6 +461,8 @@ export function Vender() {
                   <Rocket className="w-5 h-5" />
                 </button>
               </div>
+=======
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
             </div>
           )}
 
@@ -456,8 +485,12 @@ export function Vender() {
                   </label>
                   <input
                     type="text"
+<<<<<<< HEAD
                     value={productData.title}
                     onChange={(e) => setProductData(prev => ({ ...prev, title: e.target.value }))}
+=======
+                    defaultValue="Nike Air Max 90 Essential"
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                     className="input-glow w-full bg-branco-off border border-cinza-leve rounded-xl px-4 py-3"
                   />
                 </div>
@@ -469,8 +502,12 @@ export function Vender() {
                     </label>
                     <input
                       type="text"
+<<<<<<< HEAD
                       value={productData.brand}
                       onChange={(e) => setProductData(prev => ({ ...prev, brand: e.target.value }))}
+=======
+                      defaultValue="Nike"
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                       className="input-glow w-full bg-branco-off border border-cinza-leve rounded-xl px-4 py-3"
                     />
                   </div>
@@ -479,9 +516,14 @@ export function Vender() {
                       Tamanho (BR)
                     </label>
                     <input
+<<<<<<< HEAD
                       type="text"
                       value={productData.size}
                       onChange={(e) => setProductData(prev => ({ ...prev, size: e.target.value }))}
+=======
+                      type="number"
+                      defaultValue="42"
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                       className="input-glow w-full bg-branco-off border border-cinza-leve rounded-xl px-4 py-3"
                     />
                   </div>
@@ -489,6 +531,7 @@ export function Vender() {
 
                 <div className="animate-fade-in-up" style={{ animationDelay: '300ms' }}>
                   <label className="block text-sm font-medium text-azul-escuro mb-2">
+<<<<<<< HEAD
                     Cor
                   </label>
                   <input
@@ -501,15 +544,24 @@ export function Vender() {
 
                 <div className="animate-fade-in-up" style={{ animationDelay: '300ms' }}>
                   <label className="block text-sm font-medium text-azul-escuro mb-2">
+=======
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                     Condição
                   </label>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {["Novo", "Seminovo", "Usado - Bom", "Usado - Regular"].map(
+<<<<<<< HEAD
                       (cond) => (
                         <button
                           key={cond}
                           onClick={() => setProductData(prev => ({ ...prev, condition: cond as any }))}
                           className={`btn-ripple py-3 rounded-xl border text-sm font-medium transition-all ${productData.condition === cond ? "bg-azul-primario text-white border-azul-primario" : "bg-branco-off text-cinza-texto border-cinza-leve hover:bg-azul-gelo"}`}
+=======
+                      (cond, i) => (
+                        <button
+                          key={cond}
+                          className={`btn-ripple py-3 rounded-xl border text-sm font-medium transition-all ${i === 2 ? "bg-azul-primario text-white border-azul-primario" : "bg-branco-off text-cinza-texto border-cinza-leve hover:bg-azul-gelo"}`}
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                         >
                           {cond}
                         </button>
@@ -519,6 +571,7 @@ export function Vender() {
                 </div>
 
                 <div className="animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+<<<<<<< HEAD
                   <div className="flex items-center justify-between mb-2">
                     <label className="block text-sm font-medium text-azul-escuro">
                       Descrição (Gerada por IA)
@@ -542,6 +595,8 @@ export function Vender() {
                 </div>
 
                 <div className="animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+=======
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                   <label className="block text-sm font-medium text-azul-escuro mb-2">
                     Preço (R$) <span className="text-accent-erro">*</span>
                   </label>
@@ -557,8 +612,13 @@ export function Vender() {
                       placeholder="0,00"
                     />
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-accent-sucesso font-medium flex items-center gap-1">
+<<<<<<< HEAD
                       <TrendingUp className="w-3 h-3" />
                       Competitivo
+=======
+                      <Sparkles className="w-3 h-3" />
+                      Preço sugerido
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                     </div>
                   </div>
                   {hasError && (
@@ -574,16 +634,25 @@ export function Vender() {
                     Voltar
                   </button>
                   <button
+<<<<<<< HEAD
                     onClick={() => setStep(3)}
                     className="btn-ripple bg-azul-primario text-white px-8 py-4 rounded-xl font-bold hover:bg-azul-escuro transition-colors shadow-lg shadow-azul-primario/20 flex items-center gap-2"
                   >
                     Revisar Anúncio
                     <Eye className="w-5 h-5" />
+=======
+                    onClick={handlePublish}
+                    className="btn-ripple bg-azul-primario text-white px-8 py-4 rounded-xl font-bold hover:bg-azul-escuro transition-colors shadow-lg shadow-azul-primario/20 flex items-center gap-2"
+                  >
+                    <Rocket className="w-5 h-5" />
+                    Publicar Anúncio
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                   </button>
                 </div>
               </div>
             </div>
           )}
+<<<<<<< HEAD
 
           {step === 3 && (
             <div className="animate-fade-in-up">
@@ -669,6 +738,8 @@ export function Vender() {
               </div>
             </div>
           )}
+=======
+>>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
         </div>
       </div>
     </div>
