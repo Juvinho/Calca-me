@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, Zap, Ruler, ChevronLeft, ChevronRight, Heart, Clock, TrendingUp, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -75,7 +75,6 @@ const HERO_TEXTS = [
   "Renove e lucre",
 ];
 
-<<<<<<< HEAD
 // Flash Sales
 const FLASH_SALES = [
   {
@@ -160,8 +159,6 @@ const PERSONALIZED_RECOMMENDATIONS = [
   }
 ];
 
-=======
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
 export function Home() {
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -171,7 +168,6 @@ export function Home() {
   
   const [currentHeroShoe, setCurrentHeroShoe] = useState(0);
   const [heroShoeDirection, setHeroShoeDirection] = useState(0);
-<<<<<<< HEAD
   
   // Local Storage for user interactions
   const [lastViewed, setLastViewed] = useState(() => {
@@ -188,8 +184,6 @@ export function Home() {
     const saved = localStorage.getItem("favorites");
     return saved ? JSON.parse(saved) : [];
   });
-=======
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
 
   const nextHeroShoe = () => {
     setHeroShoeDirection(1);
@@ -488,7 +482,6 @@ export function Home() {
         </motion.div>
       </section>
 
-<<<<<<< HEAD
       {/* Last Viewed */}
       {lastViewed && (
         <section className="container mx-auto px-4 md:px-6">
@@ -617,9 +610,6 @@ export function Home() {
           </div>
         </div>
       </section>
-=======
-      {/* Em Alta */}
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
       <section className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl md:text-3xl font-display font-bold flex items-center gap-2">
