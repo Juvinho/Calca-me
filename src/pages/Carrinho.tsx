@@ -1,15 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Trash2, ArrowRight, ShoppingBag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const INITIAL_CART = [
-  { id: '1', title: 'Nike Air Max 90', price: 189.90, image: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&q=80&w=200', size: 42, color: 'Azul' },
-  { id: '2', title: 'Adidas Ultraboost', price: 350.00, image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&q=80&w=200', size: 39, color: 'Preto' },
-];
 
 export function Carrinho() {
-  const [items, setItems] = useState(INITIAL_CART);
+  const [items, setItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem('cart');
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      return [];
+    }
+  });
+  
+  useEffect(() => {
+    try {
+      localStorage.setItem('cart', JSON.stringify(items));
+    } catch (e) {
+      // ignore
+    }
+  }, [items]);
   const [totalFlash, setTotalFlash] = useState(false);
 
   const removeItem = (id: string) => {
