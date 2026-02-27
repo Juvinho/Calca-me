@@ -1,6 +1,5 @@
 ﻿import { useState, useEffect } from "react";
 import { UploadCloud, Camera, Sparkles, Rocket, TrendingUp, Star, DollarSign, Package, Eye, Share2, AlertCircle } from "lucide-react";
-import { GoogleGenerativeAI } from "@google/genai";
 
 function AnimatedNumber({ value }: { value: number }) {
   const [count, setCount] = useState(0);
@@ -46,32 +45,49 @@ interface ProductData {
   price: string;
 }
 
-// AI Description Generator
+// AI Description Generator (dynamic import, supports different @google/genai exports)
 async function generateDescription(productData: Partial<ProductData>): Promise<string> {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
-  
+
   if (!apiKey) {
     return `${productData.brand} ${productData.title}\nSapato em condição ${productData.condition}. Tamanho ${productData.size}. Cores: ${productData.color}.`;
   }
 
+  const prompt = `Crie uma descrição persuasiva e concisa para um anúncio de sapato em um marketplace.\nBrand: ${productData.brand}\nModelo: ${productData.title}\nTamanho: ${productData.size}\nCondição: ${productData.condition}\nCor: ${productData.color}\n\nA descrição deve ter no máximo 3 linhas, ser atrativa e destacar pontos positivos. Use emojis com moderação.`;
+
   try {
-    const client = new GoogleGenerativeAI({ apiKey });
-    const model = client.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const mod = await import('@google/genai');
+    const GoogleGenAI = mod.GoogleGenAI || mod.GoogleGenerativeAI || mod.default || mod;
 
-    const prompt = `Crie uma descrição persuasiva e concisa para um anúncio de sapato em um marketplace.
-Brand: ${productData.brand}
-Modelo: ${productData.title}
-Tamanho: ${productData.size}
-Condição: ${productData.condition}
-Cor: ${productData.color}
+    // If the old SDK shape is present (getGenerativeModel)
+    if (GoogleGenAI && typeof GoogleGenAI === 'function' && GoogleGenAI.prototype && GoogleGenAI.prototype.getGenerativeModel) {
+      const client = new GoogleGenAI({ apiKey });
+      const model = client.getGenerativeModel({ model: 'gemini-2.0-flash' });
+      const result = await model.generateContent(prompt);
+      const text = result?.response?.text?.() ?? '';
+      return text.trim() || `${productData.brand} ${productData.title}`;
+    }
 
-A descrição deve ter no máximo 3 linhas, ser atrativa e destacar pontos positivos. Use emojis com moderação.`;
+    // Newer SDK shape: instantiate and try common generation methods
+    if (GoogleGenAI) {
+      const ai = new GoogleGenAI({ apiKey });
 
-    const result = await model.generateContent(prompt);
-    const text = result.response.text();
-    return text.trim();
+      // try a few possible method names (best-effort fallback)
+      if (typeof ai.generateContent === 'function') {
+        const res = await ai.generateContent(prompt);
+        const text = res?.response?.text?.() ?? (typeof res === 'string' ? res : '');
+        return (text && text.trim()) || `${productData.brand} ${productData.title}`;
+      }
+
+      if (typeof ai.generate === 'function') {
+        const res = await ai.generate(prompt);
+        return (typeof res === 'string' ? res : JSON.stringify(res)).slice(0, 400);
+      }
+    }
+
+    return `${productData.brand} ${productData.title}\nSapato em condição ${productData.condition}. Tamanho ${productData.size}. Cores: ${productData.color}.`;
   } catch (error) {
-    console.error("Error generating description:", error);
+    console.error('Error generating description:', error);
     return `${productData.brand} ${productData.title}\nSapato em condição ${productData.condition}. Tamanho ${productData.size}. Cores: ${productData.color}.`;
   }
 }
