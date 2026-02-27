@@ -474,6 +474,15 @@ export function MedirPe() {
                           <TypewriterText text="Calcular tamanho" />
                         )}
                       </span>
+                    </RippleButton>
+                  </motion.div>
+                </div>
+              )}
+
+              {(method === "camera" || method === "ruler") && (
+                <div className="space-y-6">
+                  <motion.h3 variants={itemVariants} className="text-2xl font-display font-bold text-azul-escuro text-center">
+                    {method === "camera" ? "Escaneamento por Câmera (AR)" : "Régua Digital"}
                   </motion.h3>
                   <motion.p variants={itemVariants} className="text-cinza-texto mb-8">
                     Esta funcionalidade requer acesso à câmera ou calibração de
