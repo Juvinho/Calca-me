@@ -425,15 +425,6 @@ export function MedirPe() {
                         </div>
                       </label>
                       <div className="flex gap-2">
-<<<<<<< HEAD
-                        {["estreito", "normal", "largo"].map((w) => (
-                          <button
-                            key={w}
-                            onClick={() => setWidth(w)}
-                            className={cn(
-                              "flex-1 py-3 rounded-xl border text-sm font-medium transition-all duration-300",
-                              width === w
-=======
                         {["Estreito", "Normal", "Largo"].map((w) => (
                           <button
                             key={w}
@@ -441,7 +432,11 @@ export function MedirPe() {
                             className={cn(
                               "flex-1 py-3 rounded-xl border text-sm font-medium transition-all duration-300",
                               width === w.toLowerCase()
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
+                                ? "bg-azul-primario text-white border-azul-primario shadow-md scale-105"
+                                : "bg-branco-off text-cinza-texto border-cinza-leve hover:bg-azul-gelo hover:border-azul-claro/50",
+                            )}
+                          >
+                            {w}
                                 ? "bg-azul-primario text-white border-azul-primario shadow-md scale-105"
                                 : "bg-branco-off text-cinza-texto border-cinza-leve hover:bg-azul-gelo hover:border-azul-claro/50",
                             )}
