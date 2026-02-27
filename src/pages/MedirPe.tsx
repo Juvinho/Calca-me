@@ -425,7 +425,7 @@ export function MedirPe() {
                         </div>
                       </label>
                       <div className="flex gap-2">
-                        {["Estreito", "Normal", "Largo"].map((w) => (
+                        {['Estreito', 'Normal', 'Largo'].map((w) => (
                           <button
                             key={w}
                             onClick={() => setWidth(w.toLowerCase())}
@@ -437,15 +437,6 @@ export function MedirPe() {
                             )}
                           >
                             {w}
-                                ? "bg-azul-primario text-white border-azul-primario shadow-md scale-105"
-                                : "bg-branco-off text-cinza-texto border-cinza-leve hover:bg-azul-gelo hover:border-azul-claro/50",
-                            )}
-                          >
-<<<<<<< HEAD
-                            {w.charAt(0).toUpperCase() + w.slice(1)}
-=======
-                            {w}
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
                           </button>
                         ))}
                       </div>
