@@ -457,7 +457,6 @@ export function MedirPe() {
 
                       <span className="relative z-10 flex items-center gap-2">
                         {isMeasuring ? (
-                        {isCalculating ? (
                           <>
                             <motion.div
                               animate={{ rotate: 360 }}
@@ -472,16 +471,7 @@ export function MedirPe() {
                             Calculando tamanho...
                           </>
                         ) : (
-                          <span>
-                            {displayedText}
-                            {!isComplete && (
-                              <motion.span
-                                animate={{ opacity: [1, 0] }}
-                                transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                                className="inline-block w-[4px] h-[0.8em] bg-azul-primario align-middle ml-1 -mt-2"
-                              />
-                            )}
-                          </span>
+                          <TypewriterText text="Calcular tamanho" />
                         )}
                   </motion.h3>
                   <motion.p variants={itemVariants} className="text-cinza-texto mb-8">
