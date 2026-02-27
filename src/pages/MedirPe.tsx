@@ -103,31 +103,10 @@ function AnimatedCounter({ value, isFloat = false }: { value: number; isFloat?: 
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    let i = 0;
-    const timer = setInterval(() => {
-      if (i < text.length) {
-        setDisplayedText((prev) => prev + text.charAt(i));
-        i++;
-      } else {
-        setIsComplete(true);
-        clearInterval(timer);
-      }
-    }, 50);
-    return () => clearInterval(timer);
-  }, [text]);
-      const newCount = end * easeProgress;
-      
-      if (progress >= 1) {
-        setCount(end);
-        clearInterval(timer);
-      } else {
-        setCount(newCount);
-      }
-    }, frameTime);
-=======
+    let start = 0;
+    let end = value;
     let totalDuration = 1500;
     let incrementTime = (totalDuration / end) * 1.5;
-
     let timer = setInterval(() => {
       start += isFloat ? 0.5 : 1;
       if (start >= end) {
@@ -137,16 +116,13 @@ function AnimatedCounter({ value, isFloat = false }: { value: number; isFloat?: 
         setCount(start);
       }
     }, incrementTime);
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
+    return () => clearInterval(timer);
+  }, [value, isFloat]);
 
     return () => clearInterval(timer);
   }, [value, isFloat]);
 
-<<<<<<< HEAD
   return <span>{isFloat ? count.toFixed(1) : Math.round(count)}</span>;
-=======
-  return <span>{isFloat ? count.toFixed(1) : count}</span>;
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
 }
 
 export function MedirPe() {
