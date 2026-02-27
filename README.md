@@ -1,5 +1,4 @@
 <div align="center">
-<<<<<<< HEAD
 
 # 👟 Calça-me
 
@@ -148,4 +147,3 @@ View your app in AI Studio: https://ai.studio/apps/b25c4cdf-4b76-464a-936b-970b8
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
->>>>>>> c79505c92ed6b3aebca497cce7bd9d9fa8b93553
