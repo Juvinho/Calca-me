@@ -473,6 +473,7 @@ export function MedirPe() {
                         ) : (
                           <TypewriterText text="Calcular tamanho" />
                         )}
+                      </span>
                   </motion.h3>
                   <motion.p variants={itemVariants} className="text-cinza-texto mb-8">
                     Esta funcionalidade requer acesso à câmera ou calibração de
